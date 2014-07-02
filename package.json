@@ -1,0 +1,13 @@
+{
+  "name": "ysv",
+  "description": "the yahoo stocks visualizer",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "3.x",
+    "express3-handlebars": "0.5.x",
+    "underscore": "~1.6.0",
+    "yargs": "*",
+    "yahoo-finance": "*"
+  }
+}

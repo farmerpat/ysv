@@ -1,0 +1,22 @@
+{
+  "name": "ysv",
+  "version": "0.0.1",
+  "homepage": "https://github.com/farmerpat/ysv",
+  "description": "the yahoo stocks visualizer",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "angular": "~1.2.18",
+    "jquery-ui": "~1.10.4",
+    "angular-route": "~1.2.18"
+  }
+}
