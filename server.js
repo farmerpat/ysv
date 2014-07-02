@@ -32,6 +32,36 @@ app.get('/snap/:ticker', function (req, res) {
   });
 });
 
+app.get('/holiday/:name', function (req, res) {
+  var holidayName = req.params.name;
+  if (validHoliday(holidayName)) {
+    res.send("valid Holiday");
+  } else {
+    res.send("invalid Holiday");
+  }
+
+  res.end();
+});
+
 var server = app.listen(3001, function () {
   console.log("Server now listening on port %d", server.address().port);
 });
+
+function validHoliday (name) {
+  var n = name.toLowerCase();
+  if ((n == "christmas") ||
+      (n == "halloween") ||
+      (n == "new_years") ||
+      (n == "valentines_day") ||
+      (n == "cinco_de_mayo") ||
+      (n == "independence_day") ||
+      (n == "thanksgiving") ||
+      (n == "black_friday") ||
+      (n == "easter") ||
+      (n == "mothers_day") ||
+      (n == "memorial_day") ||
+      (n == "fathers_day") ||
+      (n == "labor_day"))
+    return true;
+  return false;
+}
