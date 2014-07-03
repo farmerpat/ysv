@@ -32,12 +32,16 @@ app.get('/snap/:ticker', function (req, res) {
   });
 });
 
-app.get('/holiday/:name', function (req, res) {
+app.get('/holidate/:name/:year', function (req, res) {
   var holidayName = req.params.name;
+  var year = req.params.year;
   if (validHoliday(holidayName)) {
-    res.send("valid Holiday");
+    var holiDate = new Holidate(holidayName, year);
+    console.log(holiDate);
+    res.send(holiDate.toString());
+    res.end();
   } else {
-    res.send("invalid Holiday");
+    res.send("invalid Holiday for " + year);
   }
 
   res.end();
@@ -46,6 +50,47 @@ app.get('/holiday/:name', function (req, res) {
 var server = app.listen(3001, function () {
   console.log("Server now listening on port %d", server.address().port);
 });
+
+// break out into a module
+function Holidate (name, year) {
+  var name = name.toLowerCase();
+  if (name == "christmas") {
+    this.date = new Date(year, 11, 25);
+  } else if (name == "halloween") {
+    this.date = new Date(year, 9, 31);
+  } else if (name == "new_years") {
+    this.date = new Date(year,0,1);
+  } else if (name == "valentines_day") {
+    this.date = new Date(year,1,14);
+  } else if (name == "cinco_de_mayo") {
+    return ;
+  } else if (name == "independence_day") {
+    return ;
+  } else if (name == "thanksgiving") {
+    return ;
+  } else if (name == "black_friday") {
+    return ;
+  } else if (name == "easter") {
+    return ;
+  } else if (name == "mothers_day") {
+    return ;
+  } else if (name == "memorial_day") {
+    return ;
+  } else if (name == "fathers_day") {
+    return ;
+  } else if (name == "labor_day") {
+    return ;
+  } else {
+    this.date = new Date(0,0,0,0,0,0,0);
+  }
+}
+
+Holidate.prototype.toString = function () {
+  var year = this.date.getFullYear();
+  var month = this.date.getMonth() + 1;
+  var day = this.date.getDate();
+  return year + "-" + month + "-" + day;
+}
 
 function validHoliday (name) {
   var n = name.toLowerCase();
