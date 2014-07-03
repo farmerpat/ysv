@@ -63,11 +63,20 @@ function Holidate (name, year) {
   } else if (name == "valentines_day") {
     this.date = new Date(year,1,14);
   } else if (name == "cinco_de_mayo") {
-    return ;
+    this.date = new Date(year, 4,5);
   } else if (name == "independence_day") {
-    return ;
+    this.date = new Date(year, 6,4);
   } else if (name == "thanksgiving") {
-    return ;
+    var d = (function () {
+      thursdays = [];
+      for (var i=1; i<32; ++i) {
+        var thisDate = new Date(year, 10, i);
+        if (thisDate.getDay() == 4)
+          thursdays.push(thisDate);
+      }
+      return thursdays[3];
+    })();
+    this.date = d;
   } else if (name == "black_friday") {
     return ;
   } else if (name == "easter") {
