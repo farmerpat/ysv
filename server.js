@@ -78,7 +78,16 @@ function Holidate (name, year) {
     })();
     this.date = d;
   } else if (name == "black_friday") {
-    return ;
+    var d = (function () {
+      thursdays = [];
+      for (var i=1; i<32; ++i) {
+        var thisDate = new Date(year, 10, i);
+        if (thisDate.getDay() == 4)
+          thursdays.push(thisDate);
+      }
+      return thursdays[3];
+    })();
+    this.date = new Date (year, 10, (d.getDate() + 1));
   } else if (name == "easter") {
     return ;
   } else if (name == "mothers_day") {
