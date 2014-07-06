@@ -108,7 +108,16 @@ function Holidate (name, year) {
       return new Date(year,n,p);
     })();
   } else if (name == "mothers_day") {
-    return ;
+    var d = (function () {
+      sundays = [];
+      for (var i=1; i<32; ++i) {
+        var thisDate = new Date(year, 4, i);
+        if (thisDate.getDay() == 0)
+          sundays.push(thisDate);
+      }
+      return sundays[1];
+    })();
+    this.date = new Date (year, 4, d.getDate());
   } else if (name == "memorial_day") {
     return ;
   } else if (name == "fathers_day") {
