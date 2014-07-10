@@ -119,7 +119,16 @@ function Holidate (name, year) {
     })();
     this.date = new Date (year, 4, d.getDate());
   } else if (name == "memorial_day") {
-    return ;
+    var d = (function () {
+      var mondays = [];
+      for (var i=1; i<32; ++i) {
+        var thisDate = new Date(year, 4, i);
+        if (thisDate.getDay() == 1)
+          mondays.push(thisDate);
+      }
+      return mondays[mondays.length-1];
+    })();
+    this.date = new Date (year, 4, d.getDate());
   } else if (name == "fathers_day") {
     return ;
   } else if (name == "labor_day") {
