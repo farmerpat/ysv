@@ -32,6 +32,37 @@ app.get('/snap/:ticker', function (req, res) {
   });
 });
 
+app.get('/range/:symbol/:d1/:d2', function (req, res) {
+  var startDate = req.params.d1;
+  var endDate = req.params.d2;
+  var symbol = req.params.symbol;
+
+  if (!validDateString(startDate) || !validDateString(endDate)) {
+    res.send({error: "invalid date(s)"});
+    res.end();
+  }
+
+  var query = {
+    symbol: symbol,
+    from: startDate,
+    to: endDate
+  };
+  yf.historical(query, function (err, quotes, url, symbol) {
+    if (err) {
+      console.log(err);
+      res.send(err);
+      res.end();
+    }
+
+    var data = {};
+    data.url = url;
+    data.symbol = symbol;
+    data.quotes = quotes;
+    res.send(data);
+    res.end();
+  });
+});
+
 app.get('/holidate/:name/:year', function (req, res) {
   var holidayName = req.params.name;
   var year = req.params.year;
@@ -50,6 +81,10 @@ app.get('/holidate/:name/:year', function (req, res) {
 var server = app.listen(3001, function () {
   console.log("Server now listening on port %d", server.address().port);
 });
+
+function validDateString(ds) {
+  return true;
+}
 
 // break out into a module
 function Holidate (name, year) {
