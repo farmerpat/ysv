@@ -130,7 +130,16 @@ function Holidate (name, year) {
     })();
     this.date = new Date (year, 4, d.getDate());
   } else if (name == "fathers_day") {
-    return ;
+    var d = (function () {
+      var sundays = [];
+      for (var i=1; i<32; ++i) {
+        var thisDate = new Date(year, 5, i);
+        if (thisDate.getDay() == 0)
+          sundays.push(thisDate);
+      }
+      return sundays[2];
+    })();
+    this.date = new Date (year, 5, d.getDate());
   } else if (name == "labor_day") {
     return ;
   } else {
