@@ -141,7 +141,14 @@ function Holidate (name, year) {
     })();
     this.date = new Date (year, 5, d.getDate());
   } else if (name == "labor_day") {
-    return ;
+    var d = (function () {
+      for (var i=1; i<31; ++i) {
+        var thisDate = new Date(year, 8, i);
+        if (thisDate.getDay() == 1)
+          return thisDate;
+      }
+    })();
+    this.date = new Date (year, 8, d.getDate());
   } else {
     this.date = new Date(0,0,0,0,0,0,0);
   }
